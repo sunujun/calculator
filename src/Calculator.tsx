@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GestureResponderEvent, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 // Button type: 'reset' | 'operator' | 'number'
@@ -47,10 +47,18 @@ const COLOR = {
 };
 
 const Calculator = () => {
-    return (
-        <View style={{ flex: 1, width: 250 }}>
-            {/* 결과 */}
+    const [input, setInput] = useState(0);
+    const [currentOperator, setCurrentOperator] = useState(null);
+    const [result, setResult] = useState(null);
+    const [tempInput, setTempInput] = useState(null);
+    const [tempOperator, setTempOperator] = useState(null);
 
+    return (
+        <View style={{ flex: 1, width: 250, justifyContent: 'center' }}>
+            {/* 결과 */}
+            <View style={styles.inputContainer}>
+                <Text style={{ color: 'white', fontSize: 35, textAlign: 'right' }}>{input}</Text>
+            </View>
             {/* [AC ~ /] */}
             <View style={styles.buttonContainer}>
                 <Button type="reset" text="AC" onPress={() => null} flex={3} />
@@ -90,6 +98,14 @@ const styles = StyleSheet.create({
     buttonContainer: {
         flexDirection: 'row',
         width: '100%',
+    },
+    inputContainer: {
+        backgroundColor: COLOR.RESULT,
+        minHeight: 50,
+        justifyContent: 'center',
+        alignItems: 'flex-end',
+        paddingVertical: 10,
+        paddingHorizontal: 5,
     },
 });
 
